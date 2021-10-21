@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<environments default="development">
+
+		<environment id="development">
+			<transactionManager type="JDBC" />
+
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver" />
+				<!--1 . EZ CONNECT -->
+				<property name="url"
+					value="jdbc:log4jdbc:oracle:thin:@localhost:1521/XE" /> <!-- 드라이브spy 설정 -->
+				 <!-- <property name="url" value="jdbc:oracle:thin:@localhost:1521/XE"/>  -->
+				<!-- 2 . TNSAlias -->
+				<!-- <property name="url" value="jdbc:oracle:thin:@XE?TNS_ADMIN=C:/oraclexe/app/oracle/product/11.2.0/server/network/ADMIN"/> -->
+				<property name="username" value="ADMIN" />
+				<property name="password" value="1004" />
+
+
+			</dataSource>
+		</environment>
+
+		<environment id="production">
+			<transactionManager type="JDBC" />
+
+			<dataSource type="POOLED">
+				<property name="driver"
+					value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+				<!--FQCN : log4jdbc 라이브러리 안에 있는 JDBC Driver class 이름 -->
+				<!--1 . EZ CONNECT -->
+				<property name="url"
+					value="jdbc:log4jdbc:oracle:thin:@localhost:1521/XE" /> <!-- 드라이브spy 설정 -->
+
+				<property name="username" value="ADMIN" />
+				<property name="password" value="1004" />
+
+				<property name="poolMaximumActiveConnections" value="10" />
+				<!-- 주어진 시간에 존재할 수 있는 활성화된(사용중인) 커넥션의 수. 디폴트는 10이다. -->
+				<property name="poolMaximumIdleConnections" value="3" />
+				<!-- 주어진 시간에 존재할 수 있는 유휴 커넥션의 수는 3개 -->
+				<property name="poolTimeToWait" value="20000" />
+				<!--풀이 로그 상태를 출력하고 비정상적으로 긴 경우 커넥션을 다시 얻을려고 시도하는 로우 레벨 설정 20초까지 기다리겠다. 
+					사용가능한 커넥션이 20초 동안 없으면 에러 -->
+				<property name="poolPingQuery" value="SELECT 1 FROM dual" />
+				<!-- 커넥션 준비여부 확인위해 DB에 던지는 핑쿼리 -->
+				<property name="poolPingEnabled" value="true" />
+				<!-- 핑쿼리를 사용할지 말지를 결정 -->
+				<property name="poolPingConnectionNotUsedFor" value="60000" />
+				<!-- poolPingQuery가 얼마나 자주 사용될지 설정한다. 60으로 설정. 60초동안 슈링킹되지않으면(사용되지않으면) 
+					해당 커넥션없앤다 -->
+				<property name="driver.encoding" value="utf8" /> <!-- db안의 모든 문자를 utf8 처리 -->
+
+			</dataSource>
+		</environment>
+
+	</environments>
+
+	<mappers>
+		<mapper resource="BoardMapper.xml" />
+		<mapper resource="TblBoardMapper.xml" />
+
+		<mapper class="com.zerock.mybatis.persistence.EmployeesMapper" />
+
+	</mappers>
+
+
+
+</configuration>

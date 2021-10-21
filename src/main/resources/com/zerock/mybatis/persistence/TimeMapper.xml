@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zerock.mybatis.persistence.TimeMapper">
+
+	<!-- <select id="getNow2" resultType="java.lang.String"> developer에서 테스트하면서 
+		문장 넣는다. SELECT sysdate FROM dual </select> -->
+
+	<select id="getNow2" resultType="java.util.Date">
+		<!-- developer에서 테스트하면서 문장 넣는다. -->
+		SELECT sysdate FROM dual
+	</select>
+
+</mapper>

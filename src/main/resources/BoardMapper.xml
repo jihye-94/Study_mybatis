@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="BoardMapper">
+	
+		<!-- SELECT/ INSERT / UPDATE / DELETE 
+		각각의 sql문장을 저장하는 태그가 이미 준비되어있다.
+		(DTD에서 정의한 태그만 사용가능) -->
+		
+		<select id="selectAllEmployees"
+		resultType="com.zerock.mybatis.domain.EmployeeVO">
+		<!-- developer에서 테스트하면서 문장 넣는다. -->					
+		SELECT /*+ INDEX_DESC(employees) */ * 
+		FROM employees
+		WHERE employee_id > #{name1}		
+		AND SALARY > #{name2}
+		AND commission_pct IS NOT NULL
+		</select>
+		
+		<select id="selectAllDepartments"
+		resultType="com.zerock.mybatis.domain.DepartmentsVO">
+		SELECT /*+ INDEX_DESC(departments) */ * 
+		FROM departments
+		</select>
+	</mapper>
